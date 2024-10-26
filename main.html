@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weddebugsite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #b88deb;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        nav {
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            color: #ffffff;
+            font-size: 1rem;
+            max-width: 600px;
+            line-height: 1.5;
+            margin-bottom: 1rem; /* Added space below subtitle */
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #ffffff;
+            color: #b88deb;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none; /* Remove underline from link */
+        }
+
+        .download-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .social-links {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            z-index: 100;
+        }
+
+        .social-links a {
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            padding: 8px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            z-index: -1;
+        }
+
+        .social-links a:hover {
+            color: #ffffff;
+            transform: translateY(-8px) scale(1.1);
+            filter: drop-shadow(0 10px 15px rgba(255, 255, 255, 0.3));
+        }
+
+        .social-links a:hover::before {
+            transform: scale(1.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links svg {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover svg {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .social-links a::after {
+            content: attr(title);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100%);
+            background: rgba(255, 255, 255, 0.9);
+            color: #b88deb;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .social-links a:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+                padding: 0 1rem;
+            }
+
+            .social-links {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>  
+</head>
+<body>    
+    <div class="content">
+        <h1>Dynamic Memory Debugger</h1>
+        <p class="subtitle">(Insert the code in test.cpp and run the exe file.)</p>
+        <p class="subtitle">(Need to have Mingw installed and it's pathing configured.)</p>
+        <div style="margin-bottom: 1rem;"></div> <!-- Added spacing -->
+        <a href="https://drive.google.com/uc?export=download&id=1SQ29cWZUyaZvi0S4VnKjbzWzk7E7nTJE" download="your-file.zip" class="download-btn">
+            Download Debugger Files
+        </a>
+    </div>
+
+    <div class="social-links">
+        <a href="https://www.linkedin.com/in/pranshulthakur/" target="_blank" title="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+            </svg>
+        </a>
+        <a href="https://github.com/Pranshul-Thakur" target="_blank" title="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 3.013c1.013.004 2.027.137 3.004.4 2.29-1.553 3.299-1.23 3.299-1.23.652 1.652.241 2.873 1.176 3.176.77 1.123 1.236 2.205 1.236 3.221 0 4.597-2.802 5.626-5.469 5.92.43.372.812 1.104.812 2.227v3.293c0 .319.191.692.797.576C20.563 21.799 24 17.301 24 12c0-6.627-5.373-12-12-12z"/>
+            </svg>
+        </a>
+    </div>
+</body>
+</html>
