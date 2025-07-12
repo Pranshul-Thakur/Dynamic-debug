@@ -1,0 +1,71 @@
+🔧 Project: Dynamic Memory Debugger in C++
+✅ What It Does:
+Tracks all dynamic memory allocations and deallocations (new, delete).
+
+Detects:
+
+Memory leaks (unfreed memory before program ends)
+
+Double deletes
+
+Invalid frees
+
+Reports issues at the end of program execution.
+
+📚 Concepts Used:
+1. Operator Overloading
+Overloaded operator new and operator delete to intercept memory allocation.
+
+Tracked extra info like file and line using a macro.
+
+2. Preprocessor Macros
+cpp
+Copy
+Edit
+#define new new(__FILE__, __LINE__)
+Replaces all new calls with a version that includes file and line info — helps track source of allocation.
+
+3. Static Class & Singleton Pattern
+Used a static method and static map in MemoryDebugger class.
+
+Ensures one global store of allocations across the program.
+
+4. Hash Map (std::unordered_map)
+Maps pointer addresses to metadata (size, file, line).
+
+Allows fast lookup for delete/validation.
+
+5. Memory Functions
+Uses malloc() and free() internally for allocation (instead of new) to avoid recursion.
+
+6. Leak Detection
+reportLeaks() called at the end to show unfreed pointers.
+
+🧪 Sample Features:
+Feature	Explanation
+Track Allocation	Logs pointer, size, file, line
+Detect Leak	If pointer is not freed, it’s reported
+Double Delete	Second delete on same pointer prints error
+Invalid Free	Deleting untracked pointer gives warning
+
+🧠 Possible Interview Questions & Answers:
+🔹 Q: Why did you override operator new instead of using malloc?
+A: Because most modern C++ code uses new/delete. Overriding these helps catch real-world leaks in user-defined classes.
+
+🔹 Q: How do you avoid infinite recursion in your new/delete?
+A: I use malloc() and free() internally instead of new/delete inside the custom operators.
+
+🔹 Q: Why use macros like #define new new(__FILE__, __LINE__)?
+A: This passes the file and line number automatically to track where the allocation happened — helpful for debugging.
+
+🔹 Q: Can this handle new[] and delete[]?
+A: Not in the basic version. But yes, we can overload operator new[] and operator delete[] the same way.
+
+🔹 Q: What happens if you don't free memory?
+A: It stays in the map and gets reported as a memory leak in reportLeaks().
+
+🔹 Q: Why is it implemented in a .h file?
+A: So that #define new and operator overrides affect all translation units (.cpp files). Also makes it header-only and portable.
+
+🔹 Q: How is this different from Valgrind or ASan?
+A: This is a simple custom solution for learning and small programs. Valgrind and AddressSanitizer are much more powerful, handle all memory and threading issues, and are used in production.
