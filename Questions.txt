@@ -1,16 +1,14 @@
-## Interview Questions
-
-**Q: Why override operator new instead of using malloc?**
+Q: Why override operator new instead of using malloc?
 A: Most modern C++ uses new/delete. Overriding these catches real-world leaks in user code.
 
-**Q: How do you avoid infinite recursion?**
+Q: How do you avoid infinite recursion?
 A: Use `malloc()` and `free()` internally instead of calling `new`/`delete` within the custom operators.
 
-**Q: Why use preprocessor macros?**
+Q: Why use preprocessor macros?
 A: To automatically capture file and line information at the call site for better debugging.
 
-**Q: What happens if memory isn't freed?**
+Q: What happens if memory isn't freed?
 A: It remains in the hash map and gets reported as a leak by `reportLeaks()`.
 
-**Q: How is this different from Valgrind?**
+Q: How is this different from Valgrind?
 A: This is a simple educational tool. Valgrind is production-grade, handles all memory issues, and includes threading support.
